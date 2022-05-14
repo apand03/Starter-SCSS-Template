@@ -1,0 +1,32 @@
+html {
+  box-sizing: border-box;
+  font-size: 125%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  line-height: 1.5;
+}
+
+input,
+button {
+  font-family: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=main.css.map */
