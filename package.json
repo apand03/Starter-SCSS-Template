@@ -9,6 +9,7 @@
   "author": "Adhik",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.1",
     "sass": "^1.51.0"
   }
 }
