@@ -1,0 +1,80 @@
+.main {
+  padding-block: 1rem;
+  background-color: #181f32;
+}
+
+.movie {
+  width: 280px;
+  background: #fff;
+  box-shadow: 0 4px 15px 4pxrgba (0, 0, 0, 0.2);
+  border-radius: 0.6rem;
+  transition: transform 0.35s ease-in-out;
+  //   cursor: pointer;
+
+  &:hover {
+    transform: translateY(-8px);
+  }
+
+  &__img {
+    max-width: 100%;
+    border-top-left-radius: 0.6rem;
+    border-top-right-radius: 0.6rem;
+  }
+
+  &__details {
+    padding-bottom: 1rem;
+  }
+
+  &__info {
+    padding: 0.6rem 0.8rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__title {
+    font-size: 0.8rem;
+  }
+
+  &__rating {
+    background-color: rgba(23, 29, 46, 0.792);
+    color: #fff;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+  }
+
+  &__overview {
+    display: none;
+  }
+}
+
+//* Classes added through JS to change the background color based on the rating
+.green.movie__rating {
+  background-color: hsl(120, 59%, 31%);
+}
+.red.movie__rating {
+  background-color: hsl(0, 88%, 61%);
+}
+.orange.movie__rating {
+  background-color: hsl(39, 96%, 30%);
+}
+
+.result {
+  margin-left: 2rem;
+  color: #fff;
+  font-size: 1.2rem;
+
+  &:last-of-type {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.679);
+  }
+}
+
+// .results {
+//   margin-left: 2rem;
+//   margin-bottom: 3rem;
+//   color: #fff;
+// }

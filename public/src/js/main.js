@@ -1,51 +1,92 @@
-const API_KEY = "b9d283ff6edd5af21b4f606d050e01c3";
-const BASE_URL = "https://api.themoviedb.org/3";
-const popularMovies = `/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&page=1`;
-const searchMovies = `/search/movie?api_key=${API_KEY}&query=`;
-const imgPath = "https://image.tmdb.org/t/p/w1280/";
+import {
+  moviesCall,
+  moviesSearch,
+  movieElementCreation,
+} from "./Helper/fetch.js";
 
-const moviesCall = async () => {
-  const response = await fetch(BASE_URL + popularMovies, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-  return data;
-};
+//* DOM Elements
+const main = document.querySelector(".main");
+const mainContainer = main.firstElementChild;
+const form = document.querySelector("form");
+const searchBtn = document.querySelector(".search");
+const p = document.createElement("p");
+const anotherP = document.createElement("p");
+p.className = "results result";
+anotherP.className = "count result";
 
-const moviesSearch = async (title) => {
-  const response = await fetch(BASE_URL + searchMovies + title, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-  return data;
-};
+async function resultsCall(func) {
+  const results = await func();
+  console.log(results.total_results);
+
+  p.textContent = `Total Results : ${results.total_results}`;
+  anotherP.textContent = ` Results on this page : ${results.results.length} `;
+
+  main.insertAdjacentElement("afterbegin", p);
+  p.insertAdjacentElement("afterend", anotherP);
+}
+
+async function searchResults(title) {
+  const results = await moviesSearch(title);
+  console.log(results.total_results);
+
+  p.textContent = `Total Results : ${results.total_results}`;
+  anotherP.textContent = ` Results on this page : ${results.results.length} `;
+
+  main.insertAdjacentElement("afterbegin", p);
+  p.insertAdjacentElement("afterend", anotherP);
+}
 
 async function displayAllMoviesData() {
   const data = await moviesCall();
-  console.log(data.results);
-  data.results.forEach(({ poster_path, title, overview, vote_average }) => {
+  console.log(data);
+  data.results.forEach(({ poster_path, title, vote_average, id }) => {
     const div = document.createElement("div");
     div.className = "movie";
-    div.innerHTML = `
-     <img src=${imgPath + poster_path} alt="${title}" class="movie__img"/>
-     <div class="movie__info">
-       <h1>${title}</h1>
-       <p>${overview}</p>
-     </div>
-    `;
-
-    document.body.appendChild(div);
+    div.innerHTML = movieElementCreation(title, poster_path, vote_average, id);
+    mainContainer.appendChild(div);
+    searchBtn.value = "";
   });
+  resultsCall(moviesCall);
 }
 
-async function displaySearchMoviesData() {
-  const data = await moviesSearch("taxi");
-  console.log(data);
+async function displaySearchMoviesData(event) {
+  event.preventDefault();
+  const searchValue = searchBtn.value;
+  if (searchValue === "") {
+    emptySearchProp();
+  } else {
+    const data = await moviesSearch(searchValue);
+    console.log(data);
+    mainContainer.innerHTML = "";
+
+    data.results.forEach(
+      ({ poster_path, title, overview, vote_average, id }) => {
+        const div = document.createElement("div");
+        div.className = "movie";
+        div.innerHTML = movieElementCreation(
+          title,
+          poster_path,
+          vote_average,
+          id
+        );
+
+        mainContainer.appendChild(div);
+        searchBtn.value = "";
+      }
+    );
+  }
+  searchResults(searchValue);
 }
 
 displayAllMoviesData();
-displaySearchMoviesData();
+
+form.addEventListener("submit", displaySearchMoviesData);
+
+function emptySearchProp() {
+  alert("Please enter a movie name");
+}
+// function details(id) {
+//   sessionStorage.setItem("movieId", id);
+//   window.location = "movie.html";
+//   return false;
+// }

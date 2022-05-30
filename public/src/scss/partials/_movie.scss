@@ -1,0 +1,60 @@
+//* Movie Page
+.movie-details {
+  display: flex;
+  padding: 2rem;
+}
+
+.movieDetail {
+  // min-height: 75vh;
+  display: flex;
+  gap: 5rem;
+  color: #fff;
+
+  img {
+    border-radius: initial;
+    width: 350px;
+    max-width: 100%;
+  }
+}
+
+.genres__title {
+  padding-block: 1rem;
+}
+
+.genres {
+  display: flex;
+  gap: 1rem;
+  margin-left: 1rem;
+  padding-bottom: 2rem;
+
+  li {
+    background-color: #ccc;
+    color: rgb(3, 0, 0);
+    font-size: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}
+
+.overview {
+  margin-left: 2rem;
+  padding-block: 1rem 2rem;
+  display: block;
+  max-width: 75%;
+  line-height: 2;
+  font-size: 0.85rem;
+}
+
+.rating {
+  margin-left: 2rem;
+  font-weight: 500;
+  border-radius: 4rem;
+  padding: 0.6rem 0.7rem;
+}

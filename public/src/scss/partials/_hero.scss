@@ -1,0 +1,24 @@
+.header {
+  padding: 1rem;
+  background-color: #1b2956;
+
+  &__container {
+    max-width: 60rem;
+    margin-inline: auto;
+  }
+
+  .logo {
+    text-transform: uppercase;
+    color: #ddd;
+    letter-spacing: 0.1rem;
+    font-size: 1.5rem;
+  }
+
+  .search {
+    background: transparent;
+    outline: 1px solid #4b515f;
+    padding: 0.5rem;
+    color: #eee;
+    border-radius: 4rem;
+  }
+}
